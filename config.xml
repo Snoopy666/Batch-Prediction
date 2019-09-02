@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <!-- tensorflow作业的名字 -->
+        <name>afo.app.name</name>
+        <value>lantian_rnn_predict_summary</value>
+    </property>
+    <property>
+        <!-- tensorflow作业做在的队列 -->
+        <name>afo.app.queue</name>
+        <value>root.gh_training.hadoop-dpsr.ai</value>
+    </property>
+
+
+     <property>
+        <name>afo.app.virtualenv.version.tf_1.10_cpu_centos6_hashtable.path</name>
+        <value>viewfs://hadoop-meituan/ghnn01/user/hadoop-hdp/tensorflow_r1.10_cpu_centos6.tar.gz</value>
+    </property>
+    <property>
+        <name>afo.engine.tensorflow.virtualenv.name</name>
+        <value>tf_1.10_cpu_centos6_hashtable</value>
+    </property>
+
+    <!--<property>-->
+        <!--<name>afo.app.virtualenv.version.tf_1.10.1_cpu_hashtable.path</name>-->
+        <!--<value>viewfs://hadoop-meituan/ghnn01/yarn/var/afo/tensorflow/virtualenv/hashtable_from_mt_r1.10.tar.gz</value>-->
+    <!--</property>-->
+    <!--<property>-->
+        <!--<name>afo.engine.tensorflow.virtualenv.name</name>-->
+        <!--<value>tf_1.10.1_cpu_hashtable</value>-->
+    <!--</property>-->
+
+    <!--<property>-->
+        <!--<name>afo.app.virtualenv.version.tensorflow_1_4_0.path</name>-->
+        <!--<value>viewfs://hadoop-meituan/ghnn01/yarn/var/afo/tensorflow/virtualenv/keras/tf_1.4.0.tar.gz</value>-->
+    <!--</property>-->
+    <!--<property>-->
+        <!--<name>afo.engine.tensorflow.virtualenv.name</name>-->
+        <!--<value>tensorflow_1_4_0</value>-->
+    <!--</property>-->
+
+    <property>
+        <name>afo.role.worker.exit-with-chief</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>afo.role.worker.container.relax</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>afo.role.worker.container.max-num.per-node</name>
+        <value>2</value>
+    </property>
+    <!-- defined ps and worker size -->
+    <property>
+        <!-- tensorflow作业使用的parameter server的个数 -->
+        <name>parameter.servers</name>
+        <value>0</value>
+    </property>
+    <property>
+        <!-- tensorflow作业的worker的个数 -->
+        <name>workers</name>
+        <value>10</value>
+    </property>
+    <!-- defined ps/worker resource -->
+    <property>
+        <name>parameter.server.memory</name>
+        <value>20480</value>
+    </property>
+    <property>
+        <name>parameter.server.vcore</name>
+        <value>7</value>
+    </property>
+    <property>
+        <!-- tensorflow作业的worker的内存大小，单位是MB -->
+        <name>worker.memory</name>
+        <value>20480</value>
+    </property>
+    <property>
+        <!-- tensorflow作业的worker的cpu个数 -->
+        <name>worker.vcore</name>
+        <value>7</value>
+    </property>
+    <property>
+        <!-- tensorflow作业的worker的gpu个数 -->
+        <name>worker.gpu</name>
+        <value>0</value>
+    </property>
+    <!-- defined ps/worker main python script -->
+    <property>
+        <name>afo.role.worker.env.PYTHONPATH</name>
+        <value>scripts</value>
+    </property>
+    <property>
+        <name>parameter.server.script</name>
+        <value>python predict.py</value>
+    </property>
+    <property>
+        <!-- tensorflow作业的worker所执行的命令，也就是入口脚本 -->
+        <name>worker.script</name>
+        <value>python predict.py</value>
+    </property>
+    <property>
+        <name>worker.input.key</name>
+        <value>args.train_data</value>
+    </property>
+    <property>
+        <name>worker.input.flatten</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>worker.input.local.dir</name>
+        <value>inputs</value>
+    </property>
+    <property>
+        <name>worker.input.local.include_parent</name>
+        <value>false</value>
+    </property>
+    <!-- 所有name为args开头的配置都是传给worker执行的脚本的命令行参数 -->
+    <property>
+        <!-- tensorboard所读取的目录，可以读取hdfs目录，但是如果是hdfs目录，请注意需要使用 viewfs://hadoop-meituan/，而不可以是 viewfs:/// 这种方式-->
+        <name>board.log_dir</name>
+        <value>viewfs://hadoop-meituan/ghnn01/user/hadoop-dpsr/lantian/recreason_lm</value>
+    </property>
+</configuration>
